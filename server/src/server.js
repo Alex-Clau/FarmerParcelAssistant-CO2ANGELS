@@ -10,7 +10,8 @@ const pool = new pg.Pool({
   database: process.env.POSTGRES_DB,
 });
 // design pattern to efficiently manage connection to the db
-// client static connection whilst pool is dynamic that allows multiple connections async
+// client -> static connection
+// pool -> dynamic and allows multiple connections
 
 async function main() {
   const client = await pool.connect();
@@ -28,4 +29,4 @@ async function main() {
 
 main()
   .then(() => console.log('Connected to Postgres!'))
-  .catch(err => console.error('Error connecting to Postgres!', err));
+  .catch(err => console.error('Error connecting to Postgres!',  err));

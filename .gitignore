@@ -16,3 +16,7 @@ build/
 
 # Docker
 .docker/
+
+**/.DS_Store
+
+data/*.json
