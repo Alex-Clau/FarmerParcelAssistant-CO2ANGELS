@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+
+  server:
+    image: server:1.0.0
+    container_name: ${SERVER_HOST}
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - ./server:/server
+      - server-v-node-modules:/server/node_modules
+    depends_on:
+      # before we connect to postgres we want to ensure it is healthy(by default it waits for server start but it's not enough)
+      database:
+        condition: service_healthy
+
+  database:
+    image: database:1.0.0
+    container_name: ${POSTGRES_HOST}
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - database-v:/var/lib/postgresql/data
+    command: "-p ${POSTGRES_PORT}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -p ${POSTGRES_PORT} -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      start_period: 0s
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  # Named volumes are used to ensure data persistence and development consistency.
+  # They store data outside the ephemeral container filesystem, linking it
+  # to the host machine's hard drive.
+
+  # 1. Volume for the Node.js application's dependencies (node_modules)
+  # This volume is critical for DEVELOPMENT. It ensures the container uses its own
+  # dependencies, preventing conflicts with the local host machine's node_modules.
+  server-v-node-modules:
+    name: "server-v-node-modules"
+
+  # 2. Volume for the PostgreSQL database data
+  # This is CRITICAL for data persistence (ensuring nothing is lost).
+  # It saves all PostgreSQL data onto your host's hard drive, independent
+  # of the container's lifecycle, which is essential for ACID compliance.
+  database-v:
+    name: "database-v"
