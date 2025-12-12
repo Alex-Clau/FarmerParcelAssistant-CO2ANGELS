@@ -10,7 +10,7 @@ const findById = async (id) => {
   return result.rows[0];
 };
 
-const findByUsername = async (username) => {
+const findByUsername= async (username) => {
   const result = await pool.query('SELECT * FROM farmers WHERE username=$1', [username]);
   return result.rows[0];
 };
@@ -28,14 +28,14 @@ const update = async (id, farmer) => {
   await pool.query(
     'UPDATE farmers SET username=$1, name=$2, phone=$3 WHERE id=$4',
     [username, name, phone, id]
-  )
+  );
 };
 
 const deleteById = async (id) => {
   await pool.query(
     'DELETE FROM farmers WHERE id=$1',
     [id]
-  )
+  );
 };
 
 module.exports = {
