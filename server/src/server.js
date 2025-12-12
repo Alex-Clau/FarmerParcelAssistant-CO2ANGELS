@@ -1,4 +1,7 @@
 const pool = require('./config/database')
+const express = require('express');
+
+const server = express();
 
 async function main() {
   const client = await pool.connect();
