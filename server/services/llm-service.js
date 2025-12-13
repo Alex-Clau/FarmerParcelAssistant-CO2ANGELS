@@ -11,7 +11,6 @@ const llmService = {
   async classifyIntent(text) {
 
     if (!isEnabled) {
-      console.log('ye')
       return null; // return to regex fallback function
     }
 
@@ -38,7 +37,8 @@ const llmService = {
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
-      const responseText = response.text().trim();
+      const responseText = response.text()
+                                   .trim();
 
       const parsed = JSON.parse(responseText);
       if (parsed.parcelId && !parsed.parcelId.startsWith('P')) {

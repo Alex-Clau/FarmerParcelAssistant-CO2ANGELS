@@ -5,10 +5,6 @@ const messageControllers = require('./../controllers/message-controllers');
 const checkAccountLink = require('./../middleware/check-account-link');
 const router = express.Router();
 
-router.get('/test', (req, res) => {
-  res.json({ message: 'Route works!' });
-});
-
 // IMPORTANT: Order of routes matters, if /:pid before /user/:uid -> /user would be used as a value for pid!
 router.post('/', [
     check('from')

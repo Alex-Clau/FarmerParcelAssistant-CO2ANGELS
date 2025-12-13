@@ -37,8 +37,7 @@ const parseWithRegex = (text) => { // fallback for llm
   const freqMatch = lowerText.match(/(daily|weekly|monthly|every\s+\d+\s+days?)/i);
   if (lowerText.match(/(set|make).*(report|frequency)/i) && freqMatch) {
     let frequency = freqMatch[1].toLowerCase();
-    // transform "every 2 days" to "2 days"
-    frequency = frequency.replace(/every\s+/, '');
+
     return {type: 'set_frequency', frequency};
   }
 

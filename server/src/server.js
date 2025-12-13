@@ -2,6 +2,7 @@ const pool = require('./config/database');
 const express = require('express');
 
 const messageRoutes = require('./../routes/message-routes');
+const reportFrequenciesRoutes = require('./../routes/report-frequencies-routes');
 const HttpError = require("./../models/http-error");
 
 const server = express();
@@ -11,12 +12,13 @@ server.use(express.json());
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
   next();
 });
 
 // IMPORTANT -> define the main routes here if any
 server.use('/message', messageRoutes); // express forwards requests to messageRoutes if the route starts with /message
+server.use('/generate-reports', reportFrequenciesRoutes); // route for generating reports
 
 // IMPORTANT -> handle unknown routes errors
 server.use((req, res, next) => {

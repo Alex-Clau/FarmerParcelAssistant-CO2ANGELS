@@ -3,7 +3,7 @@ const PhoneLink = require('../models/phone_link');
 const HttpError = require('../models/http-error');
 
 const handleLinking = async (req, res, next) => {
-  const { from, text } = req.body;
+  const {from, text} = req.body;
   const trimmedText = text.trim();
   const lowerText = trimmedText.toLowerCase();
 
@@ -29,11 +29,11 @@ const handleLinking = async (req, res, next) => {
 
     if (farmer.phone && farmer.phone !== from) { // verify phone matches (if the farmer has a phone registered)
       return res.json({
-        reply: 'This phone number does not match your registered account. Please use the phone number associated with your account or contact support.'
+        reply: 'This phone number does not match your registered account. \nPlease use the phone number associated with your account or contact support.'
       });
     }
 
-    await PhoneLink.create({ phone: from, farmer_id: farmer.id });
+    await PhoneLink.create({phone: from, farmer_id: farmer.id});
 
     return res.json({
       reply: `Great, your account has been linked to ${from}. You can now ask about your parcels.`

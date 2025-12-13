@@ -1,7 +1,7 @@
 const Parcels = require('./../models/parcels');
 const ParcelIndices = require('./../models/parcel_indices');
 const HttpError = require('./../models/http-error');
-const {generateStatusSummary} = require("../services/parcel-analysis-service");
+const generateStatusSummary = require("../services/parcel-analysis-service");
 
 const getParcelWithIndices = async (parcelId, farmerId, next) => {
   let parcel;
@@ -56,8 +56,7 @@ const getAllParcels = async (req, res, next) => {
 };
 
 const getParcelDetails = async (req, res, next) => {
-  const {parcelId} = req;
-  const farmerId = req.farmerId;
+  const {parcelId, farmerId} = req;
 
   let result;
   try {
@@ -99,8 +98,7 @@ const getParcelDetails = async (req, res, next) => {
 };
 
 const getParcelStatus = async (req, res, next) => {
-  const {parcelId} = req;
-  const farmerId = req.farmerId;
+  const {parcelId, farmerId} = req;
 
   let result;
   try {
@@ -137,3 +135,4 @@ const getParcelStatus = async (req, res, next) => {
 exports.getAllParcels = getAllParcels;
 exports.getParcelDetails = getParcelDetails;
 exports.getParcelStatus = getParcelStatus;
+exports.getParcelWithIndices = getParcelWithIndices;
