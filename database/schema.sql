@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS phone_link(
 -- REPORT FREQUENCY
 CREATE TABLE IF NOT EXISTS report_frequency(
     farmer_id VARCHAR(50) PRIMARY KEY,
-    frequency VARCHAR(50) NOT NULL,
+    frequency INTEGER NOT NULL,
+    next_report DATE NOT NULL,
     FOREIGN KEY (farmer_id) REFERENCES farmers(id) ON DELETE CASCADE  -- ensures valid id farmer is provided
 );
 

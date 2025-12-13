@@ -1,7 +1,8 @@
 const Parcels = require('./../models/parcels');
 const ParcelIndices = require('./../models/parcel_indices');
+
 const HttpError = require('./../models/http-error');
-const {generateStatusSummary} = require("../services/parcel-analysis-service");
+const generateStatusSummary = require("../services/llm/llm-summary-parcel-indices");
 
 const getParcelWithIndices = async (parcelId, farmerId, next) => {
   let parcel;
@@ -56,8 +57,7 @@ const getAllParcels = async (req, res, next) => {
 };
 
 const getParcelDetails = async (req, res, next) => {
-  const {parcelId} = req;
-  const farmerId = req.farmerId;
+  const {parcelId, farmerId} = req;
 
   let result;
   try {
@@ -74,9 +74,9 @@ const getParcelDetails = async (req, res, next) => {
     return res.json({reply: result.error});
   }
 
-  const {parcel, indices, latest} = result;
+  const {parcel, latest} = result;
 
-  if (!indices || indices.length === 0) {
+  if (!latest) {
     return res.json({
       reply: `Parcel ${parcel.id} - ${parcel.name}\nArea: ${parcel.area_ha} ha\nCrop: ${parcel.crop}\n\nNo indices available yet.`
     });
@@ -99,8 +99,7 @@ const getParcelDetails = async (req, res, next) => {
 };
 
 const getParcelStatus = async (req, res, next) => {
-  const {parcelId} = req;
-  const farmerId = req.farmerId;
+  const {parcelId, farmerId} = req;
 
   let result;
   try {
@@ -117,7 +116,7 @@ const getParcelStatus = async (req, res, next) => {
     return res.json({reply: result.error});
   }
 
-  const {parcel, indices, latest} = result;
+  const {parcel, indices} = result;
 
   if (!indices || indices.length === 0) {
     return res.json({
@@ -126,7 +125,7 @@ const getParcelStatus = async (req, res, next) => {
   }
 
   // status summary (rule-based + optional LLM)
-  const summary = await generateStatusSummary(latest);
+  const summary = await generateStatusSummary(indices);
 
   return res.json({
     reply: `Status of ${parcel.id} - ${parcel.name}:\n\n${summary}`
@@ -137,3 +136,4 @@ const getParcelStatus = async (req, res, next) => {
 exports.getAllParcels = getAllParcels;
 exports.getParcelDetails = getParcelDetails;
 exports.getParcelStatus = getParcelStatus;
+exports.getParcelWithIndices = getParcelWithIndices;

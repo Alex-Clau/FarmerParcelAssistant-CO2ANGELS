@@ -10,7 +10,7 @@ const findById = async (id) => {
   return result.rows[0];
 };
 
-const findByUsername= async (username) => {
+const findByUsername = async (username) => {
   const result = await pool.query('SELECT * FROM farmers WHERE username=$1', [username]);
   return result.rows[0];
 };
