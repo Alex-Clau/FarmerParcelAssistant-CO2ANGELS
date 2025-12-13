@@ -1,4 +1,5 @@
 const express = require('express');
+const messageSchemas = require('../schemas/message-schemas');
 
 const reportsFrequenciesControllers = require('./../controllers/report-frequencies-controllers');
 const router = express.Router();
