@@ -44,7 +44,7 @@ const handleLinking = async (req, res, next) => {
         reply: 'Your account is already linked. You can now ask about your parcels.'
       });
     }
-    return next(error);
+    return next(new HttpError('Something went wrong, could not link your account!', 500));
   }
 };
 
