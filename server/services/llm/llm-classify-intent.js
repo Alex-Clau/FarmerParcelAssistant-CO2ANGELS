@@ -1,0 +1,38 @@
+const llmService = require('./llm-service');
+
+const llmClassifyIntent = async (text) => {
+
+  const prompt = `You are a farmer assistant bot. Classify user messages into one of these intents:
+  - list_parcels: User wants to see all their parcels
+  - parcel_details: User wants details about a specific parcel (extract parcel ID like P1, P2, etc.)
+  - parcel_status: User wants status/summary of a parcel (extract parcel ID)
+  - set_frequency: User wants to set report frequency (extract frequency: daily, weekly, monthly, or "X days")
+  
+  Return ONLY valid JSON in this format:
+  {"type": "list_parcels"}
+  {"type": "parcel_details", "parcelId": "P1"}
+  {"type": "parcel_status", "parcelId": "P2"}
+  {"type": "set_frequency", "frequency": "daily"}
+  {"type": "unknown"}
+  
+  Extract parcel IDs from text (P1, P2, P3, etc.). Extract frequency from text.
+  
+  User message: "${text}"
+  
+  Return only the JSON, no other text.`;
+
+
+  const textResponse = await llmService(prompt);
+  if (!textResponse) {
+    return null; // something went wrong
+  }
+
+  const parsed = JSON.parse(textResponse);
+  if (parsed.parcelId && !parsed.parcelId.startsWith('P')) {
+    parsed.parcelId = `P${parsed.parcelId}`;
+  }
+
+  return parsed;
+}
+
+module.exports = llmClassifyIntent;

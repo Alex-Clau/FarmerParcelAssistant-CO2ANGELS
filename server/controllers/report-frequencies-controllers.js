@@ -1,7 +1,7 @@
 const ReportFrequency = require('../models/report_frequencies');
 const Parcels = require('../models/parcels');
 const HttpError = require('../models/http-error');
-const generateStatusSummary = require('../services/parcel-analysis-service');
+const generateStatusSummary = require('../services/llm/llm-summary-parcel-indices');
 const {getParcelWithIndices} = require('./parcels-controllers');
 
 const parseFrequencyToInt = (frequency) => {
@@ -107,7 +107,7 @@ const getAllDueToday = async (req, res, next) => {
           };
         }
 
-        const summary = await generateStatusSummary(result.latest);
+        const summary = await generateStatusSummary(result.indices);
 
         // update next_report
         const nextReportDate = new Date(report.next_report);
