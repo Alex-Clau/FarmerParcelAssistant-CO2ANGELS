@@ -55,3 +55,24 @@
 .send-button:hover {
   background: #0056b3;
 }
+
+.generate-reports-button {
+  padding: 0.75rem 1rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.generate-reports-button:hover:not(:disabled) {
+  background: #218838;
+}
+
+.generate-reports-button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

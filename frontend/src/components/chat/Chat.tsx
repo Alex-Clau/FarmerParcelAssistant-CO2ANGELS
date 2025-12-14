@@ -2,6 +2,8 @@ import {useState, useRef, useEffect} from 'react';
 import Message from './Message.tsx';
 import './Chat.css';
 import ErrorModal from "../ui/ErrorModal.tsx";
+import { useSendMessage } from '../../hooks/useSendMessage';
+import { useGenerateReports } from '../../hooks/useGenerateReports';
 
 interface MessageType {
   id: string;
@@ -23,46 +25,18 @@ const Chat = ({phone}: ChatProps) => {
     messagesEndRef.current?.scrollIntoView({behavior: 'smooth'});
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  const { handleSend } = useSendMessage({
+    phone,
+    input,
+    setInput,
+    setMessages,
+    setError,
+  });
 
-    const userMessage: MessageType = {
-      id: Date.now()
-              .toString(),
-      text: input,
-      isUser: true,
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    const messageText = input;
-    setInput('');
-
-    const typingId = `typing-${Date.now()}`; // add a typing message till req finishes
-    const typingMessage: MessageType = {
-      id: typingId,
-      text: 'Typing...',
-      isUser: false,
-    };
-    setMessages(prev => [...prev, typingMessage]);
-
-    try {
-      const response = await fetch('http://localhost:6777/message', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({from: phone, text: messageText}),
-      });
-      const data = await response.json();
-
-      setMessages(prev => prev.map(msg => // replace the typing message with actual response
-        msg.id === typingId
-          ? {id: typingId, text: data.reply, isUser: false}
-          : msg
-      ));
-    } catch (error: any) {
-      setMessages(prev => prev.filter(msg => msg.id !== typingId)); // remove typing message on error
-      setError(error.message || 'Something went wrong server side.');
-    }
-  };
+  const { handleGenerateReports, isGeneratingReports } = useGenerateReports({
+    setMessages,
+    setError,
+  });
 
   return <>
     {error && <ErrorModal
@@ -95,6 +69,13 @@ const Chat = ({phone}: ChatProps) => {
           onKeyPress={e => e.key === 'Enter' && handleSend()}
           className="message-input"
         />
+        <button
+          onClick={handleGenerateReports}
+          className="generate-reports-button"
+          disabled={isGeneratingReports}
+        >
+          {isGeneratingReports ? 'Generating...' : 'Generate Reports'}
+        </button>
         <button
           onClick={handleSend}
           className="send-button"
