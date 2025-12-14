@@ -10,7 +10,7 @@ const classifyIntent = (text) => { // fallback for llm
   const parcelId = extractParcelId(lowerText);
 
   // list parcels
-  if (lowerText.match(/(show|list|what).*parcels|parcels.*(list|show|all)/i)) {
+  if (lowerText.match(/(my|show|list|what).*parcels|parcels.*(list|show|all)/i)) {
     return {type: 'list_parcels'};
   }
 
