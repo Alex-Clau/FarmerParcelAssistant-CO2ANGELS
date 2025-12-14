@@ -40,7 +40,7 @@ const MessageResponse = {
     reply: {
       type: 'string',
       description: 'Response message to the user',
-      example: 'You have 2 parcels:\n P1 - North Field (10.5 ha, Wheat)\n P2 - South Field (8.2 ha, Corn)'
+      example: 'You have 2 parcels:\nP1 - North Field (10.5 ha, Wheat)\nP2 - South Field (8.2 ha, Corn)'
     }
   },
   required: ['reply']
@@ -66,7 +66,7 @@ const ReportGenerationResponse = {
       message: {
         type: 'string',
         description: 'Report message content',
-        example: 'Your weekly parcel report: \nFor parcel P1: \nNDVI is Good, indicating healthy, dense vegetation.'
+        example: 'Your weekly parcel report:\nFor parcel P1:\nNDVI is Good, indicating healthy, dense vegetation.'
       }
     },
     required: ['to', 'message']
@@ -74,7 +74,7 @@ const ReportGenerationResponse = {
   example: [
     {
       to: '+1234567890',
-      message: 'Your weekly parcel report: \nFor parcel P1: \nNDVI is Good...'
+      message: 'Your weekly parcel report:\nFor parcel P1:\nNDVI is Good...'
     }
   ]
 };

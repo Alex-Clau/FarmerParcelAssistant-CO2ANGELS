@@ -21,8 +21,9 @@ const PhoneInput = ({onPhoneSubmit}: PhoneInputProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isValidSimplePhoneNumber(phone.trim())) {
-      onPhoneSubmit(phone);
+    const cleanedPhone = phone.replace(/\D/g, ''); // remove all non-digit chars
+    if (isValidSimplePhoneNumber(cleanedPhone)) {
+      onPhoneSubmit(cleanedPhone);
     } else {
       setError('Invalid phone number');
     }

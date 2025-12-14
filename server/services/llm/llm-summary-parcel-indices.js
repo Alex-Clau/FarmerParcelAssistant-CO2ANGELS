@@ -30,7 +30,7 @@ const generateStatusSummary = async (indicesArray) => {
   const ruleBasedSummary = summaryParcelIndices(latest); // always generate the rule-based summary first
 
   const trends = trendsParcelIndices(indicesArray);
-  const trendsSummary = trends.length > 0 ? '\n' + trends.join('. ') : '';
+  const trendsSummary = trends.length > 0 ? '\n' + trends.join('.\n') : '';
 
   let finalSummary = ruleBasedSummary + trendsSummary;
 

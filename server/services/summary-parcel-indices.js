@@ -94,7 +94,7 @@ const summaryWithRules = (indices) => { // use always, llm is just enhancement
     }
   }
 
-  return summary.join('. ') + (summary.length > 0 ? '.' : '');
+  return summary.join('.\n') + (summary.length > 0 ? '.' : '');
 };
 
 module.exports = summaryWithRules;
