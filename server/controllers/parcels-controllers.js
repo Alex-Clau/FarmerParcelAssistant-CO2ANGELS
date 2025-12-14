@@ -82,10 +82,16 @@ const getParcelDetails = async (req, res, next) => {
     });
   }
 
+  let date = latest.date; // format date properly to show year-month-day
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  date = `${year}-${month}-${day}`;
+
   let reply = `Parcel ${parcel.id} – ${parcel.name}\n`;
   reply += `Area: ${parcel.area_ha} ha\n`;
   reply += `Crop: ${parcel.crop}\n`;
-  reply += `Latest indices (${latest.date}):\n`;
+  reply += `Latest indices (${date}):\n`;
   reply += `NDVI: ${latest.ndvi || 'N/A'}\n`;
   reply += `NDMI: ${latest.ndmi || 'N/A'}\n`;
   reply += `NDWI: ${latest.ndwi || 'N/A'}\n`;
