@@ -27,7 +27,8 @@ export const useGenerateReports = ({setMessages, setError,}: UseGenerateReportsP
     setMessages(prev => [...prev, loadingMessage]);
 
     try {
-      const response = await fetch('http://localhost:6777/generate-reports', {
+      const API_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${API_URL}/generate-reports`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
       });
