@@ -2,7 +2,7 @@ const llmService = require('./llm-service');
 const trendsParcelIndices = require('../trends-parcel-indices');
 const summaryParcelIndices = require('../summary-parcel-indices');
 
-const llmSummaryParcelIndices = async (indices, ruleBasedSummary) => {
+const llmSummaryParcelIndices = async (indices, ruleBasedSummary, formattedDate) => {
 
   const prompt = `You are a farmer assistant. Based on these parcel indices and the rule-based analysis, provide a natural, conversational summary in 2-3 sentences.
   Indices:
@@ -15,8 +15,11 @@ const llmSummaryParcelIndices = async (indices, ruleBasedSummary) => {
   - Potassium: ${indices.potassium || 'N/A'}%
   - pH: ${indices.ph || 'N/A'}
   
+  Measurement date: ${formattedDate}
   Rule-based analysis: ${ruleBasedSummary}
-  Provide a friendly, natural-language summary that a farmer would understand. Keep it concise (2-3 sentences).`;
+  
+  Provide a friendly, natural-language summary that a farmer would understand. Keep it concise (2-3 sentences).
+  IMPORTANT: End your summary with exactly this line: "Overall, the parcel [describe how it looks - e.g., 'healthy', 'in good condition', 'performing well', 'needs attention'] at the last measurement (${formattedDate})."`;
 
   const textResponse = await llmService(prompt);
   if (!textResponse) {
@@ -25,7 +28,7 @@ const llmSummaryParcelIndices = async (indices, ruleBasedSummary) => {
   return textResponse;
 }
 
-const generateStatusSummary = async (indicesArray) => {
+const generateStatusSummary = async (indicesArray, formattedDate) => {
   const latest = indicesArray[0];
   const ruleBasedSummary = summaryParcelIndices(latest); // always generate the rule-based summary first
 
@@ -35,10 +38,20 @@ const generateStatusSummary = async (indicesArray) => {
   let finalSummary = ruleBasedSummary + trendsSummary;
 
   if (process.env.USE_LLM === 'true' && process.env.GEMINI_API_KEY) {
-    return await llmSummaryParcelIndices(latest, finalSummary);
+    return await llmSummaryParcelIndices(latest, finalSummary, formattedDate);
   }
 
-  return finalSummary;
+  // determine parcel status based on indices
+  let statusDescription = 'in good condition';
+  if (latest.ndvi !== null && latest.ndvi < 0.30) {
+    statusDescription = 'needs attention';
+  } else if (latest.ndvi !== null && latest.ndvi > 0.55 && latest.nitrogen !== null && latest.nitrogen >= 0.7) {
+    statusDescription = 'healthy';
+  } else if (latest.ndvi !== null && latest.ndvi > 0.55) {
+    statusDescription = 'performing well';
+  }
+
+  return `${finalSummary}\n\nOverall, the parcel looks ${statusDescription} at the last measurement (${formattedDate}).`;
 };
 
 module.exports = generateStatusSummary;

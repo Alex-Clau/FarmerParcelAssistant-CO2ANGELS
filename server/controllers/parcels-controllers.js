@@ -3,6 +3,7 @@ const ParcelIndices = require('./../models/parcel_indices');
 
 const HttpError = require('./../models/http-error');
 const generateStatusSummary = require("../services/llm/llm-summary-parcel-indices");
+const formatDate = require("../services/format-date");
 
 const getParcelWithIndices = async (parcelId, farmerId, next) => {
   let parcel;
@@ -82,16 +83,12 @@ const getParcelDetails = async (req, res, next) => {
     });
   }
 
-  let date = latest.date; // format date properly to show year-month-day
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  date = `${year}-${month}-${day}`;
+  const formattedDate = formatDate(latest.date);
 
   let reply = `Parcel ${parcel.id} – ${parcel.name}\n`;
   reply += `Area: ${parcel.area_ha} ha\n`;
   reply += `Crop: ${parcel.crop}\n`;
-  reply += `Latest indices (${date}):\n`;
+  reply += `Latest indices (${formattedDate}):\n`;
   reply += `NDVI: ${latest.ndvi || 'N/A'}\n`;
   reply += `NDMI: ${latest.ndmi || 'N/A'}\n`;
   reply += `NDWI: ${latest.ndwi || 'N/A'}\n`;
@@ -122,7 +119,7 @@ const getParcelStatus = async (req, res, next) => {
     return res.json({reply: result.error});
   }
 
-  const {parcel, indices} = result;
+  const {parcel, latest, indices} = result;
 
   if (!indices || indices.length === 0) {
     return res.json({
@@ -130,8 +127,11 @@ const getParcelStatus = async (req, res, next) => {
     });
   }
 
-  // status summary (rule-based + optional LLM)
-  const summary = await generateStatusSummary(indices);
+  // Format the date from the latest indices
+  const formattedDate = formatDate(latest.date);
+
+  // status summary (rule-based + optional LLM) - pass date so it can be included
+  const summary = await generateStatusSummary(indices, formattedDate);
 
   return res.json({
     reply: `Status of ${parcel.id} - ${parcel.name}:\n\n${summary}`
