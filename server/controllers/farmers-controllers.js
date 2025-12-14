@@ -1,5 +1,4 @@
 const Farmer = require('../models/farmers');
-const PhoneLink = require('../models/phone_link');
 const HttpError = require('../models/http-error');
 
 const handleLinking = async (req, res, next) => {
@@ -27,23 +26,30 @@ const handleLinking = async (req, res, next) => {
       });
     }
 
-    if (farmer.phone && farmer.phone !== from) { // verify phone matches (if the farmer has a phone registered)
+
+    if (farmer.phone && farmer.phone !== from) {
+      // Farmer already has a different phone number
       return res.json({
-        reply: 'This phone number does not match your registered account. \nPlease use the phone number associated with your account or contact support.'
+        reply: 'This phone number does not match your registered account.\nPlease use the phone number associated with your account or contact support.'
       });
     }
 
-    await PhoneLink.create({phone: from, farmer_id: farmer.id});
+    // Update farmer's phone from null to the provided phone
+    try {
+      await Farmer.update(farmer.id, {
+        username: farmer.username,
+        name: farmer.name,
+        phone: from
+      });
+      
+      return res.json({
+        reply: `Account linked successfully! Welcome ${farmer.name}.\nYou can now ask me about your parcels.`
+      });
+    } catch (error) {
+      return next(new HttpError('Something went wrong, could not link your account!', 500));
+    }
 
-    return res.json({
-      reply: `Great, your account has been linked to ${from}. You can now ask about your parcels.`
-    });
   } catch (error) {
-    if (error.code === '23505') { // unique constraint violation code from postgreSQL
-      return res.json({
-        reply: 'Your account is already linked. You can now ask about your parcels.'
-      });
-    }
     return next(new HttpError('Something went wrong, could not link your account!', 500));
   }
 };

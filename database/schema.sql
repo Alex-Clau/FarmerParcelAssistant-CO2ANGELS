@@ -33,13 +33,6 @@ CREATE TABLE IF NOT EXISTS parcel_indices(
     FOREIGN KEY (parcel_id) REFERENCES parcels(id) ON DELETE CASCADE, UNIQUE(parcel_id, date)
 );
 
--- PHONE LINK -> for account link feature
-CREATE TABLE IF NOT EXISTS phone_link(
-    phone VARCHAR(50) PRIMARY KEY,
-    farmer_id VARCHAR(50) NOT NULL,
-    FOREIGN KEY (farmer_id) REFERENCES farmers(id) ON DELETE CASCADE
-);
-
 -- REPORT FREQUENCY
 CREATE TABLE IF NOT EXISTS report_frequency(
     farmer_id VARCHAR(50) PRIMARY KEY,

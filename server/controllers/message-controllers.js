@@ -3,7 +3,7 @@ const {validationResult} = require('express-validator');
 const classifyIntent = require("../services/classify-intent");
 const llmClassifyIntent = require('../services/llm/llm-classify-intent');
 
-const phoneLinksController = require('./phone-links-controllers');
+const farmersController = require('./farmers-controllers');
 const parcelsController = require('./parcels-controllers');
 const reportFrequenciesController = require('./report-frequencies-controllers');
 
@@ -16,7 +16,7 @@ const parseResponse = async (req, res, next) => {
   }
 
   if (!req.isLinked) {
-    return phoneLinksController.handleLinking(req, res, next);
+    return farmersController.handleLinking(req, res, next);
   }
 
   const {text} = req.body;

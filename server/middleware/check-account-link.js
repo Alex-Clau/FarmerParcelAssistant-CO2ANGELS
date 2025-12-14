@@ -1,20 +1,19 @@
-const PhoneLink = require('../models/phone_link');
-
+const Farmer = require('../models/farmers');
 const HttpError = require('./../models/http-error');
 
 const checkAccountLink = async (req, res, next) => {
   const {from} = req.body;
 
   try {
-    const phoneLink = await PhoneLink.findByPhone(from);
+    const farmer = await Farmer.findByPhone(from);
 
-    if (!phoneLink) { // user not linked
-      req.isLinked = false;
+    if (farmer) {
+      req.isLinked = true;
+      req.farmerId = farmer.id;
       return next();
     }
 
-    req.isLinked = true; // user linked
-    req.farmerId = phoneLink.farmer_id;
+    req.isLinked = false;
     next();
   } catch (error) {
     next(new HttpError('Something went wrong, could not find phone!', 500));

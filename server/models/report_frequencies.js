@@ -12,10 +12,10 @@ const findByFarmerId = async (farmerId) => {
 
 const findAllDue = async (date) => {
   const result = await pool.query(
-    `SELECT rf.*, pl.phone 
+    `SELECT rf.*, f.phone
      FROM report_frequency rf
-     JOIN phone_link pl ON rf.farmer_id = pl.farmer_id
-     WHERE rf.next_report <= $1`,
+     JOIN farmers f ON rf.farmer_id = f.id
+     WHERE rf.next_report <= $1 AND f.phone IS NOT NULL`,
     [date]
   );
   return result.rows;

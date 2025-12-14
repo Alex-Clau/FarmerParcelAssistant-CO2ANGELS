@@ -53,7 +53,7 @@ const getAllParcels = async (req, res, next) => {
     .map((parcel) => `${parcel.id} - ${parcel.name} (${parcel.area_ha} ha, ${parcel.crop})`)
     .join('\n');
 
-  return res.json({reply: `You have ${parcels.length} ${parcels.length > 1 ? 'parcels:' : 'parcel:'} \n ${parcelList}`});
+  return res.json({reply: `You have ${parcels.length} ${parcels.length > 1 ? 'parcels:' : 'parcel:'}\n${parcelList}`});
 };
 
 const getParcelDetails = async (req, res, next) => {

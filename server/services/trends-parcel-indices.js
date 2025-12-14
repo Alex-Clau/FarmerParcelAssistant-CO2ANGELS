@@ -12,9 +12,9 @@ const trendsParcelIndices = (indices) => {
   if (latest.ndvi !== null && oldest.ndvi !== null) {
     const overallChange = latest.ndvi - oldest.ndvi;
     if (overallChange > 0.1) {
-      trends.push('NDVI has improved since the start.');
+      trends.push('NDVI has improved since the start');
     } else if (overallChange < -0.1) {
-      trends.push('NDVI has declined since the start.');
+      trends.push('NDVI has declined since the start');
     }
   }
 

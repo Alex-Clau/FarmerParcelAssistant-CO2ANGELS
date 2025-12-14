@@ -28,7 +28,8 @@ const setFrequency = async (req, res, next) => {
   const {frequency} = req; // from message-controllers
   const farmerId = req.farmerId;
 
-  if (!frequency) {
+  // Check if frequency is missing entirely
+  if (!frequency || (typeof frequency === 'string' && frequency.trim() === '')) {
     return res.json({
       reply: 'Please specify a frequency. Examples: "daily", "weekly", "2 days", "monthly"'
     });
@@ -36,6 +37,7 @@ const setFrequency = async (req, res, next) => {
 
   const daysBetweenReports = parseFrequencyToInt(frequency);
 
+  // If frequency was provided but is invalid, show the specific error message
   if (!daysBetweenReports) {
     return res.json({
       reply: 'Invalid frequency. Please use: "daily", "weekly", "monthly", or "X days" (e.g., "2 days")'
@@ -91,7 +93,7 @@ const getAllDueToday = async (req, res, next) => {
         if (!parcels || parcels.length === 0) {
           return {
             to: report.phone,
-            message: 'Your weekly parcel report: \nYou have no parcels registered yet.'
+            message: 'Your weekly parcel report:\nYou have no parcels registered yet.'
           };
         }
 
@@ -103,7 +105,7 @@ const getAllDueToday = async (req, res, next) => {
         if (!result || result.error || !result.latest) {
           return {
             to: report.phone,
-            message: `Your weekly parcel report: \nParcel ${parcel.id} has no data available yet.`
+            message: `Your weekly parcel report:\nParcel ${parcel.id} has no data available yet.`
           };
         }
 
@@ -120,7 +122,7 @@ const getAllDueToday = async (req, res, next) => {
 
         return {
           to: report.phone,
-          message: `Your weekly parcel report: \nFor parcel ${parcel.id}: \n${summary}`
+          message: `Your weekly parcel report:\nFor parcel ${parcel.id}:\n${summary}`
         };
       } catch (error) {
         console.error(`Error generating report for farmer ${report.farmer_id}:`, error);

@@ -15,6 +15,11 @@ const findByUsername = async (username) => {
   return result.rows[0];
 };
 
+const findByPhone = async (phone) => {
+  const result = await pool.query('SELECT * FROM farmers WHERE phone=$1', [phone]);
+  return result.rows[0];
+};
+
 const create = async (farmer) => {
   const {id, username, name, phone} = farmer;
   await pool.query(
@@ -42,6 +47,7 @@ module.exports = {
   findAll,
   findById,
   findByUsername,
+  findByPhone,
   create,
   update,
   deleteById

@@ -1,0 +1,64 @@
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+.phone-input-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.phone-input-box h2 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.phone-input-box p {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.phone-input-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.phone-input-field {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.phone-input-field:focus {
+  border-color: #007bff;
+}
+
+.phone-submit-button {
+  padding: 0.75rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.phone-submit-button:hover {
+  background: #0056b3;
+}
+
