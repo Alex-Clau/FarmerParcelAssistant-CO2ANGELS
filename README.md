@@ -64,12 +64,15 @@ docker compose up -d
 
 ### POST `/message`
 
-Send a chat message to the assistant.
+Send a chat message to the assistant. Test via Postamn or on the application after setting it up.
+
+Via postman: POST http://54.194.249.252:6777/message (for the deployed application) or change the url to localhost
+Via deployed application: login with "0741111111" and say "Show me my parcels"
 
 **Request:**
 ```json
 {
-  "from": "+40123456789",
+  "from": "+40741111111",
   "text": "Show me my parcels"
 }
 ```
@@ -90,6 +93,9 @@ Send a chat message to the assistant.
 ### POST `/generate-reports`
 
 Generate reports for farmers due to receive one today. (With the press of a button or API call)
+
+Via postman: POST http://54.194.249.252:6777/generate-reports (for the deployed application) or change the url to localhost
+Via deployed application: press "Generate reports", no phone number needed (Functionality for showcase purposes)
 
 **Response:**
 ```json
@@ -231,10 +237,10 @@ npm test
 
 ## Extending
 
-- **WhatsApp**: Replace POST `/message` with WhatsApp webhook (WhatsApp Business API)
-- **Cron Jobs**: Use `node-cron` to auto-schedule `POST /generate-reports`
-- **TIFF Processing**: Use `gdal`/`sharp` to process satellite imagery and calculate indices
-- **Multi-LLM**: Add OpenAI/Anthropic support with conversation history
+- **WhatsApp**: Replace POST `/message` with WhatsApp webhook (WhatsApp Business API), `Nginx` reverse-proxy configuration needed for https connection
+- **Cron Jobs**: Use `node-cron`/`node-schedule` to auto-schedule `POST /generate-reports` (replacing manual triggers)
+- **TIFF Processing**: Use `gdal`/`sharp` to process satellite imagery and calculate indices directly in the backend
+- **Multi-LLM**: Add OpenAI/Anthropic support with conversation history and rate-limiting for requests to control API costs
 
 ## Environment Variables
 
