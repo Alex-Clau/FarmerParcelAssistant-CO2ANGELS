@@ -27,7 +27,7 @@ A chat-based assistant that helps farmers get information about their agricultur
 
 1. **Clone and setup**
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/Alex-Clau/FarmerParcelAssistant-CO2ANGELS.git>
    cd FarmerParcelAssistant-CO2ANGELS
    cp .env.example .env
    cp frontend/.env.example frontend/.env
