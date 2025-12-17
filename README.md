@@ -11,10 +11,10 @@ USE_LLM=true currently
 - **Chat Endpoint** - POST `/message` for natural language queries
 - **Account Linking** - Phone number to farmer account linking
 - **Parcel Management** - List parcels, view details, get status summaries
-- **Report Generation** - Automated periodic reports (POST `/generate-reports`) (Simulated manually by user now)
-- **LLM Integration** - Optional Gemini API for enhanced understanding
+- **Report Generation** - Automated periodic reports (POST `/generate-reports`) (Simulated manually by user)
+- **LLM Integration** - Optional Gemini API for enhanced understanding (Check .env.example)
 - **Frontend** - React/TypeScript chat interface
-- **Database** - PostgreSQL with proper schema and relationships
+- **Database** - PostgreSQL with proper schema, relationships, and seeding function for populating 
 - **Tests** - 53 unit tests covering core functionality
 - **Postman Tests** - 100 tests covering both endpoints
 
@@ -66,8 +66,14 @@ docker compose up -d
 
 Send a chat message to the assistant. Test via Postamn or on the application after setting it up.
 
-Via postman: POST http://54.194.249.252:6777/message (for the deployed application) or change the url to localhost
-Via deployed application: login with "0741111111" and say "Show me my parcels"
+### Via Postman
+Send a POST request to:
+- Deployed application: `http://54.194.249.252:6777/message`
+- Local development: `http://localhost:6777/message`
+
+### Via Web Interface
+1. Log in using the phone number: `0741111111`
+2. Type your message (e.g., "Show me my parcels") in the chat interface
 
 **Request:**
 ```json
@@ -94,18 +100,36 @@ Via deployed application: login with "0741111111" and say "Show me my parcels"
 
 Generate reports for farmers due to receive one today. (With the press of a button or API call)
 
-Via postman: POST http://54.194.249.252:6777/generate-reports (for the deployed application) or change the url to localhost
-Via deployed application: press "Generate reports", no phone number needed (Functionality for showcase purposes)
+### Via Postman
+Send a POST request to:
+- Deployed application: `http://54.194.249.252:6777/generate-reports`
+- Local development: `http://localhost:6777/generate-reports`
 
-**Response:**
+### Via Web Interface
+Simply click the "Generate reports" button in the application interface. No phone number is required as this is a showcase functionality.
+
+## Response Format
+
+The endpoint returns an array of reports. The response varies based on the available data:
+
+
+### When Reports Are Available
+Returns an array containing report objects with recipient phone numbers and messages:
 ```json
 [
   {
-    "to": "+40123456789",
+    "to": "+4071111111",
     "message": "Your weekly parcel report: Parcel P1 is healthy..."
   }
 ]
 ```
+
+### When No Reports Are Due
+Returns an empty array if there are no reports due for generation:
+```json
+[] 
+```
+
 
 ## Architecture
 
