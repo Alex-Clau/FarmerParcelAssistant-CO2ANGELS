@@ -44,11 +44,22 @@ export const useSendMessage = ({phone, input, setInput, setMessages, setError,}:
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({from: phone, text: messageText}),
       });
-      const data = await response.json();
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `Server error: ${response.status}`);
+      }
+
+      const text = await response.text();
+      if (!text) {
+        throw new Error('Empty response from server');
+      }
+
+      const data = JSON.parse(text);
 
       setMessages(prev => prev.map(msg =>
         msg.id === typingId
-          ? {id: typingId, text: data.reply, isUser: false}
+          ? {id: typingId, text: data.reply || 'No response from server', isUser: false}
           : msg
       ));
     } catch (error: any) {

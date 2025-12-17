@@ -15,12 +15,12 @@ const llmClassifyIntent = async (text) => {
   {"type": "set_frequency", "frequency": "daily"}
   {"type": "unknown"}
   
-  Extract parcel IDs from text (P1, P2, P3, etc.). Extract frequency from text.
+  Extract the first substring from the text that matches the pattern: the letter P (case-insensitive) followed immediately by one or more digits.
+  Extract frequency from text.
   
   User message: "${text}"
   
   Return only the JSON, no other text.`;
-
 
   const textResponse = await llmService(prompt);
   if (!textResponse) {
@@ -28,8 +28,9 @@ const llmClassifyIntent = async (text) => {
   }
 
   const parsed = JSON.parse(textResponse);
-  if (parsed.parcelId && !parsed.parcelId.startsWith('P')) {
-    parsed.parcelId = `P${parsed.parcelId}`;
+  if (parsed.parcelId) {
+    const normalized = parsed.parcelId.replace(/^[Pp]/, ''); // remove P or p if present
+    parsed.parcelId = `P${normalized}`; // always add uppercase P
   }
 
   return parsed;

@@ -18,7 +18,8 @@ const getParcelWithIndices = async (parcelId, farmerId, next) => {
   }
 
   if (parcel.farmer_id !== farmerId) { // verify the parcel belongs to the current farmer
-    return {error: 'You do not have access to this parcel.'};
+    // IMPORTANT -> better for the farmer to know only of his parcels so he doesn't have an idea how many parcels we have in db
+    return {error: `Parcel ${parcelId} not found.`}; // instead of 'You do not have access to this parcel'
   }
 
   // get all indices for this parcel (ordered by date DESC)
@@ -89,14 +90,14 @@ const getParcelDetails = async (req, res, next) => {
   reply += `Area: ${parcel.area_ha} ha\n`;
   reply += `Crop: ${parcel.crop}\n`;
   reply += `Latest indices (${formattedDate}):\n`;
-  reply += `NDVI: ${latest.ndvi || 'N/A'}\n`;
-  reply += `NDMI: ${latest.ndmi || 'N/A'}\n`;
-  reply += `NDWI: ${latest.ndwi || 'N/A'}\n`;
-  reply += `SOC: ${latest.soc || 'N/A'}\n`;
-  reply += `Nitrogen: ${latest.nitrogen || 'N/A'}\n`;
-  reply += `Phosphorus: ${latest.phosphorus || 'N/A'}\n`;
-  reply += `Potassium: ${latest.potassium || 'N/A'}\n`;
-  reply += `pH: ${latest.ph || 'N/A'}`;
+  reply += `NDVI: ${latest.ndvi !== null && latest.ndvi !== undefined ? latest.ndvi : 'no value available for this date'}\n`;
+  reply += `NDMI: ${latest.ndmi !== null && latest.ndmi !== undefined ? latest.ndmi : 'no value available for this date'}\n`;
+  reply += `NDWI: ${latest.ndwi !== null && latest.ndwi !== undefined ? latest.ndwi : 'no value available for this date'}\n`;
+  reply += `SOC: ${latest.soc !== null && latest.soc !== undefined ? latest.soc : 'no value available for this date'}\n`;
+  reply += `Nitrogen: ${latest.nitrogen !== null && latest.nitrogen !== undefined ? latest.nitrogen : 'no value available for this date'}\n`;
+  reply += `Phosphorus: ${latest.phosphorus !== null && latest.phosphorus !== undefined ? latest.phosphorus : 'no value available for this date'}\n`;
+  reply += `Potassium: ${latest.potassium !== null && latest.potassium !== undefined ? latest.potassium : 'no value available for this date'}\n`;
+  reply += `pH: ${latest.ph !== null && latest.ph !== undefined ? latest.ph : 'no value available for this date'}`;
 
   return res.json({reply});
 };
@@ -127,14 +128,14 @@ const getParcelStatus = async (req, res, next) => {
     });
   }
 
-  // Format the date from the latest indices
+  // format the date from the latest indices
   const formattedDate = formatDate(latest.date);
 
   // status summary (rule-based + optional LLM) - pass date so it can be included
   const summary = await generateStatusSummary(indices, formattedDate);
 
   return res.json({
-    reply: `Status of ${parcel.id} - ${parcel.name}:\n\n${summary}`
+    reply: `Parcel ${parcel.id} – ${parcel.name}\n${summary}`
   });
 };
 

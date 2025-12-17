@@ -6,14 +6,21 @@ const handleLinking = async (req, res, next) => {
   const trimmedText = text.trim();
   const lowerText = trimmedText.toLowerCase();
 
-  const isGreeting = !trimmedText ||
-    trimmedText.length === 0 ||
-    lowerText === 'hi' ||
-    lowerText === 'hello';
-
-  if (isGreeting) {
+  if (['help', 'support', 'human', 'agent'].includes(lowerText)) { // if the user needs help
     return res.json({
-      reply: 'Welcome! Please type your username to link your account.'
+      reply: "To use this bot, you must link your account first. If you forgot your username, please contact support."
+    });
+  }
+
+  if (lowerText.match(/^(hi|hello|greetings)\b/i)) { // greeting message if user greets bot
+    return res.json({
+      reply: 'Welcome to the CO2 Angels Farm Assistant! Your phone number is not linked to an account yet. Please type your username to link your account.'
+    });
+  }
+
+  if (trimmedText.match(/^p\d+/i)) { // check if pid provided ex:'p1', 'P1'
+    return res.json({
+      reply: "I see you are looking for a parcel, but I need to know who you are first. Please type your username to link your account."
     });
   }
 
@@ -28,13 +35,13 @@ const handleLinking = async (req, res, next) => {
 
 
     if (farmer.phone && farmer.phone !== from) {
-      // Farmer already has a different phone number
+      // farmer already has a different phone number
       return res.json({
         reply: 'This phone number does not match your registered account.\nPlease use the phone number associated with your account or contact support.'
       });
     }
 
-    // Update farmer's phone from null to the provided phone
+    // update farmer's phone from null to the provided phone
     try {
       await Farmer.update(farmer.id, {
         username: farmer.username,
@@ -43,7 +50,7 @@ const handleLinking = async (req, res, next) => {
       });
       
       return res.json({
-        reply: `Account linked successfully! Welcome ${farmer.name}.\nYou can now ask me about your parcels.`
+        reply: `Great, ${farmer.name}! Your account has been linked to ${from}. You can now ask about your parcels, for example: "Show me my parcels" or "How is parcel P1?".`
       });
     } catch (error) {
       return next(new HttpError('Something went wrong, could not link your account!', 500));

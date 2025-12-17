@@ -2,95 +2,106 @@ const summaryWithRules = (indices) => { // use always, llm is just enhancement
   const {ndvi, ndmi, ndwi, soc, nitrogen, phosphorus, potassium, ph} = indices;
   const summary = [];
 
-  // NDVI (Normalized Difference Vegetation Index)
+  // vegetation section
   if (ndvi !== null && ndvi !== undefined) {
-    if (ndvi > 0.75) {
-      summary.push('NDVI is Very High, indicating extremely vigorous crop canopy');
-    } else if (ndvi > 0.55) { // 0.55 - 0.75
-      summary.push('NDVI is Good, indicating healthy, dense vegetation');
-    } else if (ndvi > 0.30) { // 0.30 - 0.55
-      summary.push('NDVI is Average, indicating developing vegetation with moderate health');
-    } else { // 0.00 - 0.30
-      summary.push('NDVI is Bad, indicating poor vegetation health, bare soil, or stressed crop');
+    const ndviNum = Number(ndvi);
+    if (!isNaN(ndviNum)) {
+      if (ndviNum > 0.75) {
+        summary.push(`Vegetation is very strong (NDVI ≈ ${ndviNum.toFixed(2)})`);
+      } else if (ndviNum > 0.55) {
+        summary.push(`Vegetation is healthy (NDVI ≈ ${ndviNum.toFixed(2)})`);
+      } else if (ndviNum > 0.30) {
+        summary.push(`Vegetation is developing (NDVI ≈ ${ndviNum.toFixed(2)})`);
+      } else {
+        summary.push(`Vegetation needs attention (NDVI ≈ ${ndviNum.toFixed(2)})`);
+      }
     }
   }
 
-  // NDMI (Moisture Index)
+  // moisture and water section (grouped together)
+  let ndmiStatus = null;
+  let ndwiStatus = null;
+  
   if (ndmi !== null && ndmi !== undefined) {
     if (ndmi > 0.30) {
-      summary.push('NDMI is Good, showing high moisture and healthy water content');
-    } else if (ndmi >= 0.15) { // 0.15 - 0.30
-      summary.push('NDMI is Average, showing moderate moisture');
-    } else { // < 0.15
-      summary.push('NDMI is Bad/Dry, indicating low moisture and possible drought stress');
+      ndmiStatus = 'good';
+    } else if (ndmi >= 0.15) {
+      ndmiStatus = 'moderate';
+    } else {
+      ndmiStatus = 'low';
     }
   }
-
-  // NDWI (Water Index)
   if (ndwi !== null && ndwi !== undefined) {
     if (ndwi > 0.25) {
-      summary.push('NDWI is Good, showing strong water presence');
-    } else if (ndwi >= 0.10) { // 0.10 - 0.25
-      summary.push('NDWI is Average, indicating moderate water content');
-    } else { // < 0.10
-      summary.push('NDWI is Bad, indicating low water presence');
+      ndwiStatus = 'acceptable';
+    } else if (ndwi >= 0.10) {
+      ndwiStatus = 'moderate';
+    } else {
+      ndwiStatus = 'low';
     }
   }
-
-  // SOC (Soil Organic Carbon)
-  if (soc !== null && soc !== undefined) {
-    if (soc > 2.5) {
-      summary.push('SOC is High, indicating rich organic content');
-    } else if (soc >= 1.5) { // 1.5 - 2.5
-      summary.push('SOC is Moderate');
-    } else { // < 1.5
-      summary.push('SOC is Low/Bad, indicating poor soil organic matter');
-    }
+  
+  if (ndmiStatus && ndwiStatus) {
+    summary.push(`Soil moisture (NDMI) is ${ndmiStatus}, and water index (NDWI) is ${ndwiStatus}`);
+  } else if (ndmiStatus) {
+    summary.push(`Soil moisture (NDMI) is ${ndmiStatus}`);
+  } else if (ndwiStatus) {
+    summary.push(`Water index (NDWI) is ${ndwiStatus}`);
   }
 
-  // Nitrogen (N)
+  // soil nutrients section (separate)
   if (nitrogen !== null && nitrogen !== undefined) {
-    if (nitrogen > 1.0) {
-      summary.push('Nitrogen levels are High/Good');
-    } else if (nitrogen >= 0.7) { // 0.7 - 1.0
-      summary.push('Nitrogen levels are Adequate');
-    } else { // < 0.7
-      summary.push('Nitrogen levels are Low, and the crop may need fertilization');
+    const nitrogenNum = Number(nitrogen);
+    if (!isNaN(nitrogenNum)) {
+      if (nitrogenNum > 1.0) {
+        summary.push(`Nitrogen levels are high (≈${nitrogenNum.toFixed(2)})`);
+      } else if (nitrogenNum >= 0.7) {
+        summary.push(`Nitrogen levels are adequate (≈${nitrogenNum.toFixed(2)})`);
+      } else {
+        summary.push(`Nitrogen levels are low (≈${nitrogenNum.toFixed(2)}), and the crop may need fertilization`);
+      }
     }
   }
 
-  // Phosphorus (P)
   if (phosphorus !== null && phosphorus !== undefined) {
-    if (phosphorus > 0.45) {
-      summary.push('Phosphorus levels are High');
-    } else if (phosphorus >= 0.35) { // 0.35 - 0.45
-      summary.push('Phosphorus levels are Adequate');
-    } else { // < 0.35
-      summary.push('Phosphorus levels are Low');
+    const phosphorusNum = Number(phosphorus);
+    if (!isNaN(phosphorusNum)) {
+      if (phosphorusNum > 0.45) {
+        summary.push(`Phosphorus levels are high (≈${phosphorusNum.toFixed(2)})`);
+      } else if (phosphorusNum >= 0.35) {
+        summary.push(`Phosphorus levels are adequate (≈${phosphorusNum.toFixed(2)})`);
+      } else {
+        summary.push(`Phosphorus levels are low (≈${phosphorusNum.toFixed(2)})`);
+      }
     }
   }
 
-  // Potassium (K)
   if (potassium !== null && potassium !== undefined) {
-    if (potassium > 0.7) {
-      summary.push('Potassium levels are High/Good');
-    } else if (potassium >= 0.55) { // 0.55 - 0.7
-      summary.push('Potassium levels are Adequate');
-    } else { // < 0.55
-      summary.push('Potassium levels are Low');
+    const potassiumNum = Number(potassium);
+    if (!isNaN(potassiumNum)) {
+      if (potassiumNum > 0.7) {
+        summary.push(`Potassium levels are high (≈${potassiumNum.toFixed(2)})`);
+      } else if (potassiumNum >= 0.55) {
+        summary.push(`Potassium levels are adequate (≈${potassiumNum.toFixed(2)})`);
+      } else {
+        summary.push(`Potassium levels are low (≈${potassiumNum.toFixed(2)})`);
+      }
     }
   }
 
-  // pH Level
+  // pH section
   if (ph !== null && ph !== undefined) {
-    if (ph > 7.0) { // > 7.0
-      summary.push('Soil pH is Alkaline, which may cause nutrient availability issues');
-    } else if (ph >= 6.0) { // 6.0 - 7.0
-      summary.push('Soil pH is Good/Neutral, which is ideal for most crops');
-    } else if (ph >= 5.5) { // 5.5 - 6.0
-      summary.push('Soil pH is Slightly Acidic and acceptable');
-    } else { // < 5.5
-      summary.push('Soil pH is Bad/Acidic, which is problematic for most crops');
+    const phNum = Number(ph);
+    if (!isNaN(phNum)) {
+      if (phNum > 7.0) {
+        summary.push(`Soil pH is around ${phNum.toFixed(1)}, which may cause nutrient availability issues`);
+      } else if (phNum >= 6.0) {
+        summary.push(`Soil pH is around ${phNum.toFixed(1)}, which is suitable for most crops`);
+      } else if (phNum >= 5.5) {
+        summary.push(`Soil pH is around ${phNum.toFixed(1)}, which is slightly acidic but acceptable`);
+      } else {
+        summary.push(`Soil pH is around ${phNum.toFixed(1)}, which is problematic for most crops`);
+      }
     }
   }
 
