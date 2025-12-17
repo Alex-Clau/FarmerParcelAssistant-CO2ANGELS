@@ -4,6 +4,7 @@ A chat-based assistant that helps farmers get information about their agricultur
 
 ## Deployed application -> not production grade 
 http://54.194.249.252:6778 
+USE_LLM=true currently
 
 ## Features
 
