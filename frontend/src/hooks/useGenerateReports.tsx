@@ -34,7 +34,8 @@ export const useGenerateReports = ({setMessages, setError,}: UseGenerateReportsP
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate reports');
+        const errorData = await response.json();
+        throw new Error(errorData.message || `Server error: ${response.status}`);
       }
 
       const reports = await response.json();
@@ -44,9 +45,12 @@ export const useGenerateReports = ({setMessages, setError,}: UseGenerateReportsP
         )
         .join('\n\n');
 
+      const reportsText =  reports.length === 0 ? 'No farmer needs to be sent a report at this time.' : `Reports generated successfully!\n${reports.length} report${reports.length !== 1 ? 's' : ''} sent:\n\n${parsedReports}`;
+
+
       const resultMessage: MessageType = {
         id: Date.now().toString(),
-        text: `Reports generated successfully!\n${reports.length} report${reports.length !== 1 ? 's' : ''} sent:\n\n${parsedReports}`,
+        text: reportsText,
         isUser: false,
       };
 

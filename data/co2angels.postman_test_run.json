@@ -1,0 +1,672 @@
+{
+	"id": "bcf81e58-8845-482b-aaa3-3b9dc86d8603",
+	"name": "co2angels",
+	"timestamp": "2025-12-16T23:24:58.644Z",
+	"collection_id": "50633579-e822a6a9-af7c-4893-a9e2-b2bb8e59e115",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 100,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-12-16T23:24:58.069Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "ebe00a37-444d-46c1-a738-4a595cd7cfc9",
+			"name": "http://localhost:6777/message",
+			"url": "http://localhost:6777/message",
+			"time": 67,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"1. Status code is 200 OK": true,
+				"2. Status code indicates successful response (2xx)": true,
+				"3. Status code is not 4xx client error": true,
+				"4. Status code is not 5xx server error": true,
+				"5. Status code is not 3xx redirect": true,
+				"6. Response has Content-Type header": true,
+				"7. Content-Type is JSON": true,
+				"8. Response has CORS headers": true,
+				"9. Response does not have error headers": true,
+				"10. Response headers are valid object": true,
+				"11. Response body is valid JSON": true,
+				"12. Response body is an object": true,
+				"13. Response body is not null": true,
+				"14. Response body is not undefined": true,
+				"15. Response body is not empty string": true,
+				"16. Response body can be parsed as JSON object": true,
+				"17. Response contains 'reply' field": true,
+				"18. Response structure matches expected format": true,
+				"19. Response time is acceptable (< 10000ms)": true,
+				"20. Response time is optimal (< 5000ms)": true,
+				"21. Response time is reasonable (< 2000ms)": true,
+				"22. Response time is logged for monitoring": true,
+				"23. 'reply' field is a string": true,
+				"24. 'reply' field is not empty": true,
+				"25. 'reply' field has reasonable length (1-5000 characters)": true,
+				"26. 'reply' field does not contain only whitespace": true,
+				"27. 'reply' field is not null": true,
+				"28. 'reply' field is not undefined": true,
+				"29. 'reply' field has minimum meaningful length": true,
+				"30. 'reply' does not contain error markers": true,
+				"31. 'reply' is properly formatted (no undefined/null strings)": true,
+				"32. 'reply' contains valid characters": true,
+				"33. Response is contextually appropriate for input message": true,
+				"34. Response matches category expectations": true,
+				"35. Response does not contain error stack traces": true,
+				"36. Response does not contain sensitive data": true,
+				"37. Response does not contain HTML tags": true,
+				"38. Response does not contain script tags": true,
+				"39. Response is user-friendly (no technical jargon)": true,
+				"40. Response provides helpful guidance": true,
+				"41. Response handles account linking appropriately": true,
+				"42. Response does not expose internal errors": true,
+				"43. Response contains relevant information": true,
+				"44. Response handles special characters correctly": true,
+				"45. Response provides actionable information": true,
+				"46. Response handles unknown intent gracefully": true,
+				"47. Response structure is valid for message endpoint": true,
+				"48. Response is complete and well-formed": true,
+				"49. Response size is reasonable": true,
+				"50. Response meets all quality criteria": true
+			},
+			"testPassFailCounts": {
+				"1. Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"2. Status code indicates successful response (2xx)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"3. Status code is not 4xx client error": {
+					"pass": 1,
+					"fail": 0
+				},
+				"4. Status code is not 5xx server error": {
+					"pass": 1,
+					"fail": 0
+				},
+				"5. Status code is not 3xx redirect": {
+					"pass": 1,
+					"fail": 0
+				},
+				"6. Response has Content-Type header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"7. Content-Type is JSON": {
+					"pass": 1,
+					"fail": 0
+				},
+				"8. Response has CORS headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"9. Response does not have error headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"10. Response headers are valid object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"11. Response body is valid JSON": {
+					"pass": 1,
+					"fail": 0
+				},
+				"12. Response body is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"13. Response body is not null": {
+					"pass": 1,
+					"fail": 0
+				},
+				"14. Response body is not undefined": {
+					"pass": 1,
+					"fail": 0
+				},
+				"15. Response body is not empty string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"16. Response body can be parsed as JSON object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"17. Response contains 'reply' field": {
+					"pass": 1,
+					"fail": 0
+				},
+				"18. Response structure matches expected format": {
+					"pass": 1,
+					"fail": 0
+				},
+				"19. Response time is acceptable (< 10000ms)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"20. Response time is optimal (< 5000ms)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"21. Response time is reasonable (< 2000ms)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"22. Response time is logged for monitoring": {
+					"pass": 1,
+					"fail": 0
+				},
+				"23. 'reply' field is a string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"24. 'reply' field is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"25. 'reply' field has reasonable length (1-5000 characters)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"26. 'reply' field does not contain only whitespace": {
+					"pass": 1,
+					"fail": 0
+				},
+				"27. 'reply' field is not null": {
+					"pass": 1,
+					"fail": 0
+				},
+				"28. 'reply' field is not undefined": {
+					"pass": 1,
+					"fail": 0
+				},
+				"29. 'reply' field has minimum meaningful length": {
+					"pass": 1,
+					"fail": 0
+				},
+				"30. 'reply' does not contain error markers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"31. 'reply' is properly formatted (no undefined/null strings)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"32. 'reply' contains valid characters": {
+					"pass": 1,
+					"fail": 0
+				},
+				"33. Response is contextually appropriate for input message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"34. Response matches category expectations": {
+					"pass": 1,
+					"fail": 0
+				},
+				"35. Response does not contain error stack traces": {
+					"pass": 1,
+					"fail": 0
+				},
+				"36. Response does not contain sensitive data": {
+					"pass": 1,
+					"fail": 0
+				},
+				"37. Response does not contain HTML tags": {
+					"pass": 1,
+					"fail": 0
+				},
+				"38. Response does not contain script tags": {
+					"pass": 1,
+					"fail": 0
+				},
+				"39. Response is user-friendly (no technical jargon)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"40. Response provides helpful guidance": {
+					"pass": 1,
+					"fail": 0
+				},
+				"41. Response handles account linking appropriately": {
+					"pass": 1,
+					"fail": 0
+				},
+				"42. Response does not expose internal errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"43. Response contains relevant information": {
+					"pass": 1,
+					"fail": 0
+				},
+				"44. Response handles special characters correctly": {
+					"pass": 1,
+					"fail": 0
+				},
+				"45. Response provides actionable information": {
+					"pass": 1,
+					"fail": 0
+				},
+				"46. Response handles unknown intent gracefully": {
+					"pass": 1,
+					"fail": 0
+				},
+				"47. Response structure is valid for message endpoint": {
+					"pass": 1,
+					"fail": 0
+				},
+				"48. Response is complete and well-formed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"49. Response size is reasonable": {
+					"pass": 1,
+					"fail": 0
+				},
+				"50. Response meets all quality criteria": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				67
+			],
+			"allTests": [
+				{
+					"1. Status code is 200 OK": true,
+					"2. Status code indicates successful response (2xx)": true,
+					"3. Status code is not 4xx client error": true,
+					"4. Status code is not 5xx server error": true,
+					"5. Status code is not 3xx redirect": true,
+					"6. Response has Content-Type header": true,
+					"7. Content-Type is JSON": true,
+					"8. Response has CORS headers": true,
+					"9. Response does not have error headers": true,
+					"10. Response headers are valid object": true,
+					"11. Response body is valid JSON": true,
+					"12. Response body is an object": true,
+					"13. Response body is not null": true,
+					"14. Response body is not undefined": true,
+					"15. Response body is not empty string": true,
+					"16. Response body can be parsed as JSON object": true,
+					"17. Response contains 'reply' field": true,
+					"18. Response structure matches expected format": true,
+					"19. Response time is acceptable (< 10000ms)": true,
+					"20. Response time is optimal (< 5000ms)": true,
+					"21. Response time is reasonable (< 2000ms)": true,
+					"22. Response time is logged for monitoring": true,
+					"23. 'reply' field is a string": true,
+					"24. 'reply' field is not empty": true,
+					"25. 'reply' field has reasonable length (1-5000 characters)": true,
+					"26. 'reply' field does not contain only whitespace": true,
+					"27. 'reply' field is not null": true,
+					"28. 'reply' field is not undefined": true,
+					"29. 'reply' field has minimum meaningful length": true,
+					"30. 'reply' does not contain error markers": true,
+					"31. 'reply' is properly formatted (no undefined/null strings)": true,
+					"32. 'reply' contains valid characters": true,
+					"33. Response is contextually appropriate for input message": true,
+					"34. Response matches category expectations": true,
+					"35. Response does not contain error stack traces": true,
+					"36. Response does not contain sensitive data": true,
+					"37. Response does not contain HTML tags": true,
+					"38. Response does not contain script tags": true,
+					"39. Response is user-friendly (no technical jargon)": true,
+					"40. Response provides helpful guidance": true,
+					"41. Response handles account linking appropriately": true,
+					"42. Response does not expose internal errors": true,
+					"43. Response contains relevant information": true,
+					"44. Response handles special characters correctly": true,
+					"45. Response provides actionable information": true,
+					"46. Response handles unknown intent gracefully": true,
+					"47. Response structure is valid for message endpoint": true,
+					"48. Response is complete and well-formed": true,
+					"49. Response size is reasonable": true,
+					"50. Response meets all quality criteria": true
+				}
+			]
+		},
+		{
+			"id": "d2ac7178-a0c8-4519-af10-d6550c9b68a4",
+			"name": "http://localhost:6777/generate-reports",
+			"url": "http://localhost:6777/generate-reports",
+			"time": 38,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"1. Status code is 200 OK": true,
+				"2. Status code indicates successful response (2xx)": true,
+				"3. Status code is not 4xx client error": true,
+				"4. Status code is not 5xx server error": true,
+				"5. Status code is not 3xx redirect": true,
+				"6. Response has Content-Type header": true,
+				"7. Content-Type is application/json": true,
+				"8. Response has CORS headers": true,
+				"9. Response does not have error headers": true,
+				"10. Response headers are valid object": true,
+				"11. Response body is valid JSON": true,
+				"12. Response body is an array": true,
+				"13. Response body is not null": true,
+				"14. Response body is not undefined": true,
+				"15. Response body is not empty string": true,
+				"16. Response body can be parsed as JSON": true,
+				"17. Response does not contain error object at root": true,
+				"18. Response structure matches expected format": true,
+				"19. Response time is acceptable (under 10000ms)": true,
+				"20. Response time is optimal (under 5000ms)": true,
+				"21. Response time is reasonable (under 2000ms)": true,
+				"22. Response time is logged for monitoring": true,
+				"23. Response array is valid": true,
+				"24. Array length matches seeded report frequencies (max 2)": true,
+				"25. Array length is reasonable (under 1000 reports)": true,
+				"26. Empty array is valid when no reports due": true,
+				"27. Array contains objects when not empty": true,
+				"28. All reports have required 'to' field": true,
+				"29. All reports have required 'message' field": true,
+				"30. All 'to' fields are strings": true,
+				"31. All 'message' fields are strings": true,
+				"32. All 'to' fields are non-empty": true,
+				"33. All 'message' fields are non-empty": true,
+				"34. Report objects have exactly 2 fields": true,
+				"35. Report objects only contain expected fields": true,
+				"36. No null values in critical fields": true,
+				"37. No undefined values in critical fields": true,
+				"38. Phone numbers match seeded farmer data": true,
+				"39. All phone numbers match valid format": true,
+				"40. All phone numbers start with '+' or are numeric": true,
+				"41. All phone numbers have minimum 9 digits": true,
+				"42. All phone numbers are unique in response": true,
+				"43. Phone numbers contain only valid characters": true,
+				"44. All messages start with report header": true,
+				"45. F1 report includes all 5 parcels (P1-P5)": true,
+				"46. F2 report includes their parcel (P6)": true,
+				"47. All messages contain date in YYYY-MM-DD format": true,
+				"48. All messages contain 'For parcel' pattern for each parcel": true,
+				"49. All messages have proper formatting with newlines": true,
+				"50. All messages contain status or measurement information": true
+			},
+			"testPassFailCounts": {
+				"1. Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"2. Status code indicates successful response (2xx)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"3. Status code is not 4xx client error": {
+					"pass": 1,
+					"fail": 0
+				},
+				"4. Status code is not 5xx server error": {
+					"pass": 1,
+					"fail": 0
+				},
+				"5. Status code is not 3xx redirect": {
+					"pass": 1,
+					"fail": 0
+				},
+				"6. Response has Content-Type header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"7. Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"8. Response has CORS headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"9. Response does not have error headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"10. Response headers are valid object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"11. Response body is valid JSON": {
+					"pass": 1,
+					"fail": 0
+				},
+				"12. Response body is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"13. Response body is not null": {
+					"pass": 1,
+					"fail": 0
+				},
+				"14. Response body is not undefined": {
+					"pass": 1,
+					"fail": 0
+				},
+				"15. Response body is not empty string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"16. Response body can be parsed as JSON": {
+					"pass": 1,
+					"fail": 0
+				},
+				"17. Response does not contain error object at root": {
+					"pass": 1,
+					"fail": 0
+				},
+				"18. Response structure matches expected format": {
+					"pass": 1,
+					"fail": 0
+				},
+				"19. Response time is acceptable (under 10000ms)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"20. Response time is optimal (under 5000ms)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"21. Response time is reasonable (under 2000ms)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"22. Response time is logged for monitoring": {
+					"pass": 1,
+					"fail": 0
+				},
+				"23. Response array is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"24. Array length matches seeded report frequencies (max 2)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"25. Array length is reasonable (under 1000 reports)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"26. Empty array is valid when no reports due": {
+					"pass": 1,
+					"fail": 0
+				},
+				"27. Array contains objects when not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"28. All reports have required 'to' field": {
+					"pass": 1,
+					"fail": 0
+				},
+				"29. All reports have required 'message' field": {
+					"pass": 1,
+					"fail": 0
+				},
+				"30. All 'to' fields are strings": {
+					"pass": 1,
+					"fail": 0
+				},
+				"31. All 'message' fields are strings": {
+					"pass": 1,
+					"fail": 0
+				},
+				"32. All 'to' fields are non-empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"33. All 'message' fields are non-empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"34. Report objects have exactly 2 fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"35. Report objects only contain expected fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"36. No null values in critical fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"37. No undefined values in critical fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"38. Phone numbers match seeded farmer data": {
+					"pass": 1,
+					"fail": 0
+				},
+				"39. All phone numbers match valid format": {
+					"pass": 1,
+					"fail": 0
+				},
+				"40. All phone numbers start with '+' or are numeric": {
+					"pass": 1,
+					"fail": 0
+				},
+				"41. All phone numbers have minimum 9 digits": {
+					"pass": 1,
+					"fail": 0
+				},
+				"42. All phone numbers are unique in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"43. Phone numbers contain only valid characters": {
+					"pass": 1,
+					"fail": 0
+				},
+				"44. All messages start with report header": {
+					"pass": 1,
+					"fail": 0
+				},
+				"45. F1 report includes all 5 parcels (P1-P5)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"46. F2 report includes their parcel (P6)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"47. All messages contain date in YYYY-MM-DD format": {
+					"pass": 1,
+					"fail": 0
+				},
+				"48. All messages contain 'For parcel' pattern for each parcel": {
+					"pass": 1,
+					"fail": 0
+				},
+				"49. All messages have proper formatting with newlines": {
+					"pass": 1,
+					"fail": 0
+				},
+				"50. All messages contain status or measurement information": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				38
+			],
+			"allTests": [
+				{
+					"1. Status code is 200 OK": true,
+					"2. Status code indicates successful response (2xx)": true,
+					"3. Status code is not 4xx client error": true,
+					"4. Status code is not 5xx server error": true,
+					"5. Status code is not 3xx redirect": true,
+					"6. Response has Content-Type header": true,
+					"7. Content-Type is application/json": true,
+					"8. Response has CORS headers": true,
+					"9. Response does not have error headers": true,
+					"10. Response headers are valid object": true,
+					"11. Response body is valid JSON": true,
+					"12. Response body is an array": true,
+					"13. Response body is not null": true,
+					"14. Response body is not undefined": true,
+					"15. Response body is not empty string": true,
+					"16. Response body can be parsed as JSON": true,
+					"17. Response does not contain error object at root": true,
+					"18. Response structure matches expected format": true,
+					"19. Response time is acceptable (under 10000ms)": true,
+					"20. Response time is optimal (under 5000ms)": true,
+					"21. Response time is reasonable (under 2000ms)": true,
+					"22. Response time is logged for monitoring": true,
+					"23. Response array is valid": true,
+					"24. Array length matches seeded report frequencies (max 2)": true,
+					"25. Array length is reasonable (under 1000 reports)": true,
+					"26. Empty array is valid when no reports due": true,
+					"27. Array contains objects when not empty": true,
+					"28. All reports have required 'to' field": true,
+					"29. All reports have required 'message' field": true,
+					"30. All 'to' fields are strings": true,
+					"31. All 'message' fields are strings": true,
+					"32. All 'to' fields are non-empty": true,
+					"33. All 'message' fields are non-empty": true,
+					"34. Report objects have exactly 2 fields": true,
+					"35. Report objects only contain expected fields": true,
+					"36. No null values in critical fields": true,
+					"37. No undefined values in critical fields": true,
+					"38. Phone numbers match seeded farmer data": true,
+					"39. All phone numbers match valid format": true,
+					"40. All phone numbers start with '+' or are numeric": true,
+					"41. All phone numbers have minimum 9 digits": true,
+					"42. All phone numbers are unique in response": true,
+					"43. Phone numbers contain only valid characters": true,
+					"44. All messages start with report header": true,
+					"45. F1 report includes all 5 parcels (P1-P5)": true,
+					"46. F2 report includes their parcel (P6)": true,
+					"47. All messages contain date in YYYY-MM-DD format": true,
+					"48. All messages contain 'For parcel' pattern for each parcel": true,
+					"49. All messages have proper formatting with newlines": true,
+					"50. All messages contain status or measurement information": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 105,
+	"collection": {
+		"requests": [
+			{
+				"id": "ebe00a37-444d-46c1-a738-4a595cd7cfc9",
+				"method": "POST"
+			},
+			{
+				"id": "d2ac7178-a0c8-4519-af10-d6550c9b68a4",
+				"method": "POST"
+			}
+		]
+	}
+}

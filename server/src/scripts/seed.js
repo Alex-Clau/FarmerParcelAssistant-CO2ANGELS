@@ -3,6 +3,7 @@ const path = require('path');
 const Farmer = require('../../models/farmers');
 const Parcel = require('../../models/parcels');
 const ParcelIndices = require('../../models/parcel_indices');
+const ReportFrequency = require('../../models/report_frequencies');
 
 async function seedDatabase() {
   try {
@@ -13,10 +14,12 @@ async function seedDatabase() {
     const farmersPath = path.join(dataDir, 'farmers.json');
     const parcelsPath = path.join(dataDir, 'parcels.json');
     const parcelIndicesPath = path.join(dataDir, 'parcel_indices.json');
+    const reportFrequenciesPath = path.join(dataDir, 'report_frequencies.json');
 
     const farmersData = JSON.parse(fs.readFileSync(farmersPath, 'utf8'));
     const parcelsData = JSON.parse(fs.readFileSync(parcelsPath, 'utf8'));
     const parcelIndicesData = JSON.parse(fs.readFileSync(parcelIndicesPath, 'utf8'));
+    const reportFrequenciesData = JSON.parse(fs.readFileSync(reportFrequenciesPath, 'utf8'));
 
     // seed farmers
     console.log('Seeding farmers...');
@@ -72,6 +75,21 @@ async function seedDatabase() {
           } else {
             throw error;
           }
+        }
+      }
+    }
+
+    // seed report frequencies (for testing /generate-reports endpoint)
+    console.log('Seeding report frequencies...');
+    for (const reportFreq of reportFrequenciesData) {
+      try {
+        await ReportFrequency.create(reportFreq);
+        console.log(`Created report frequency for farmer ${reportFreq.farmer_id}`);
+      } catch (error) {
+        if (error.code === '23505') {
+          console.log(`Report frequency for farmer ${reportFreq.farmer_id} already exists, skipping...`);
+        } else {
+          throw error;
         }
       }
     }

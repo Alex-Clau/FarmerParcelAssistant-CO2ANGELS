@@ -5,7 +5,7 @@ const trendsParcelIndices = (indices) => {
 
   const latest = indices[0];
   const previous = indices[1];
-  const oldest = indices[indices.length - 1]; // first measurement
+  const oldest = indices[indices.length - 1]; // first ever measurement
   const trends = [];
 
   // NDVI: Overall trend (start -> now)

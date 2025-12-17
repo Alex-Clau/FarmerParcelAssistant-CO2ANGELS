@@ -4,7 +4,7 @@ const summaryParcelIndices = require('../summary-parcel-indices');
 
 const llmSummaryParcelIndices = async (indices, ruleBasedSummary, formattedDate) => {
 
-  const prompt = `You are a farmer assistant. Based on these parcel indices and the rule-based analysis, provide a natural, conversational summary in 2-3 sentences.
+  const prompt = `You are a farmer assistant. Based on these parcel indices and the rule-based analysis, provide a natural, conversational summary in 3-4 sentences.
   Indices:
   - NDVI: ${indices.ndvi || 'N/A'}
   - NDMI: ${indices.ndmi || 'N/A'}
@@ -18,8 +18,10 @@ const llmSummaryParcelIndices = async (indices, ruleBasedSummary, formattedDate)
   Measurement date: ${formattedDate}
   Rule-based analysis: ${ruleBasedSummary}
   
-  Provide a friendly, natural-language summary that a farmer would understand. Keep it concise (2-3 sentences).
-  IMPORTANT: End your summary with exactly this line: "Overall, the parcel [describe how it looks - e.g., 'healthy', 'in good condition', 'performing well', 'needs attention'] at the last measurement (${formattedDate})."`;
+  IMPORTANT: Provide a friendly, natural-language summary that a farmer would understand. Keep it concise (3-4 sentences).
+  OPTIONAL: Adding some of the more important values of the indices(only values no % or special characters).  
+  IMPORTANT: Do no add an initial greeting. Do not add references to the date, apart from the one in the last sentence.
+  IMPORTANT: End your summary with exactly this line: "Overall, the parcel [describe how it looks - e.g., 'is healthy', 'is in good condition', 'is performing well', 'needs attention', ...] at the last measurement (${formattedDate})."`;
 
   const textResponse = await llmService(prompt);
   if (!textResponse) {
@@ -41,7 +43,7 @@ const generateStatusSummary = async (indicesArray, formattedDate) => {
     return await llmSummaryParcelIndices(latest, finalSummary, formattedDate);
   }
 
-  // determine parcel status based on indices
+  // determine parcel status based on indices when USE_LLM=false
   let statusDescription = 'in good condition';
   if (latest.ndvi !== null && latest.ndvi < 0.30) {
     statusDescription = 'needs attention';
@@ -51,7 +53,7 @@ const generateStatusSummary = async (indicesArray, formattedDate) => {
     statusDescription = 'performing well';
   }
 
-  return `${finalSummary}\n\nOverall, the parcel looks ${statusDescription} at the last measurement (${formattedDate}).`;
+  return `${finalSummary}\nOverall, the parcel looks ${statusDescription} at the last measurement (${formattedDate}).`;
 };
 
 module.exports = generateStatusSummary;

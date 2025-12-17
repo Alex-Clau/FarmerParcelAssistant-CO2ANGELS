@@ -15,7 +15,7 @@ const classifyIntent = (text) => { // fallback for llm
   }
 
   // parcel details
-  if (parcelId && lowerText.match(/(detail|about|information|tell me)/i)) {
+  if (parcelId && lowerText.match(/(details?|about|information|tell me)/i)) {
     return {type: 'parcel_details', parcelId};
   }
 

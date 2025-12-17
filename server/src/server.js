@@ -1,5 +1,5 @@
-const pool = require('./config/database');
 const express = require('express');
+require('dotenv');
 
 const messageRoutes = require('./../routes/message-routes');
 const reportFrequenciesRoutes = require('./../routes/report-frequencies-routes');
@@ -8,7 +8,7 @@ const HttpError = require("./../models/http-error");
 const server = express();
 server.use(express.json());
 
-// IMPORTANT -> reminder to set headers at the start of the request (FOR FUTURE FRONTEND)
+// IMPORTANT -> enable CORS and set response headers
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -16,7 +16,7 @@ server.use((req, res, next) => {
   next();
 });
 
-// IMPORTANT -> define the main routes here if any
+// IMPORTANT -> define the main routes
 server.use('/message', messageRoutes); // express forwards requests to messageRoutes if the route starts with /message
 server.use('/generate-reports', reportFrequenciesRoutes); // route for generating reports
 
@@ -35,7 +35,8 @@ server.use((error, req, res, next) => {
      .json({message: error.message || 'An error occurred!'});
 });
 
-const port = process.env.SERVER_PORT || 8000;
+// IMPORTANT -> start the server
+const port = process.env.SERVER_PORT;
 server.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
 });

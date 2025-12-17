@@ -13,9 +13,10 @@ interface MessageType {
 
 interface ChatProps {
   phone: string;
+  onLogout: () => void;
 }
 
-const Chat = ({phone}: ChatProps) => {
+const Chat = ({phone, onLogout}: ChatProps) => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [input, setInput] = useState('');
   const [error, setError] = useState<any>(null);
@@ -46,8 +47,17 @@ const Chat = ({phone}: ChatProps) => {
 
     <div className="chat-container">
       <div className="chat-header">
+        <div>
         <h2>Farmer Assistant</h2>
         <p>{phone}</p>
+        </div>
+        <button
+          onClick={onLogout}
+          className="logout-button"
+          title="Logout"
+        >
+          Logout
+        </button>
       </div>
 
       <div className="messages-container">

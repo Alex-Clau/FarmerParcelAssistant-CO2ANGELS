@@ -1,0 +1,12 @@
+[
+  {
+    "farmer_id": "F1",
+    "frequency": 7,
+    "next_report": "2024-01-01"
+  },
+  {
+    "farmer_id": "F2",
+    "frequency": 1,
+    "next_report": "2024-01-01"
+  }
+]

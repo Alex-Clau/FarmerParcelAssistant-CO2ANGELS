@@ -13,11 +13,33 @@
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .chat-header h2 {
   margin: 0;
   font-size: 1.2rem;
+}
+
+.chat-header p {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .messages-container {
@@ -30,7 +52,7 @@
 .input-container {
   display: flex;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.75rem;
   background: white;
   border-top: 1px solid #ddd;
 }
@@ -41,6 +63,7 @@
   border: 1px solid #ddd;
   border-radius: 20px;
   outline: none;
+  font-size: 16px; 
 }
 
 .send-button {
@@ -75,4 +98,37 @@
   background: #6c757d;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+@media (max-width: 480px) {
+  .input-container {
+    padding: 0.75rem 0.5rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .message-input {
+    padding: 0.875rem 1rem;
+    min-width: 0;
+    flex: 1 1 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px; /* Touch-friendly */
+  }
+
+  .generate-reports-button {
+    font-size: 0.85rem;
+    padding: 0.875rem 0.75rem;
+    flex: 1 1 auto;
+    min-height: 44px; /* Touch-friendly */
+    min-width: 0;
+  }
+
+  .send-button {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+    flex: 0 0 auto;
+    min-height: 44px; /* Touch-friendly */
+    min-width: 80px;
+  }
 }
