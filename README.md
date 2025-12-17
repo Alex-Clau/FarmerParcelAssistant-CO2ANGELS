@@ -17,6 +17,7 @@ USE_LLM=true currently
 - **Database** - PostgreSQL with proper schema, relationships, and seeding function for populating 
 - **Tests** - 53 unit tests covering core functionality
 - **Postman Tests** - 100 tests covering both endpoints
+- **Data directory** - for seeding the database and showcasing Postman tests, **NOT** used for storing data
 
 ## Tech Stack
 
