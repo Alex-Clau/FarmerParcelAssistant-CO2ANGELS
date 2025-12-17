@@ -6,7 +6,7 @@ const llmClassifyIntent = async (text) => {
   - list_parcels: User wants to see all their parcels
   - parcel_details: User wants details about a specific parcel (extract parcel ID like P1, P2, etc.)
   - parcel_status: User wants status/summary of a parcel (extract parcel ID)
-  - set_frequency: User wants to set report frequency (extract frequency: daily, weekly, monthly, or "X days")
+  - set_frequency: User wants to set report frequency (extract frequency: daily, weekly, monthly, or "X days") (ONLY THOSE FREQUENCIES ALLOWED)
   
   Return ONLY valid JSON in this format:
   {"type": "list_parcels"}
