@@ -3,7 +3,7 @@
 A chat-based assistant that helps farmers get information about their agricultural parcels through natural language queries. Built for **CO2 Angels** technical assignment. 
 
 ## Deployed application -> not production grade 
-http://54.194.249.252:6778 
+http://54.194.249.252:6778 - **offline** 
 USE_LLM=true currently
 
 ## Features
