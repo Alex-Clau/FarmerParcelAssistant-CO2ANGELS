@@ -25,14 +25,14 @@ A chat-based assistant that helps farmers get information about their agricultur
       <td style="padding-right: 15px; border: none; vertical-align: top;">
         <img src="https://github.com/user-attachments/assets/63e30d07-f489-4171-8a45-5091e208322c" height="450" alt="Auth Flow" />
       </td>
-      <td style="padding-right: 15px; border: none; vertical-align: top;">
-        <img src="https://github.com/user-attachments/assets/aa602693-b3ea-434a-b5c5-9f68ebd6ed58" height="450" alt="Report Generation" />
+      <td style="padding: 0; border: none; vertical-align: top;">
+        <img src="https://github.com/user-attachments/assets/71aa5899-4928-4b28-90e4-6bd6b62cd532" height="450" alt="Detailed View" />
       </td>
       <td style="padding-right: 15px; border: none; vertical-align: top;">
         <img src="https://github.com/user-attachments/assets/4bb196a4-d220-4ee8-9f30-897df5b1743f" height="450" alt="Parcel Inquiry" />
       </td>
-      <td style="padding: 0; border: none; vertical-align: top;">
-        <img src="https://github.com/user-attachments/assets/71aa5899-4928-4b28-90e4-6bd6b62cd532" height="450" alt="Detailed View" />
+      <td style="padding-right: 15px; border: none; vertical-align: top;">
+        <img src="https://github.com/user-attachments/assets/aa602693-b3ea-434a-b5c5-9f68ebd6ed58" height="450" alt="Report Generation" />
       </td>
     </tr>
   </table>
