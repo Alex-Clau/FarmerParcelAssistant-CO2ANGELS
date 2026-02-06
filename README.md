@@ -2,9 +2,7 @@
 
 A chat-based assistant that helps farmers get information about their agricultural parcels through natural language queries. Built for **CO2 Angels** technical assignment. 
 
-## Deployed application -> not production grade 
-http://54.194.249.252:6778 - **offline** 
-USE_LLM=true currently
+## Deployed application -> **This application was previously deployed on AWS EC2 for demonstration purposes.**
 
 ## Features
 
@@ -91,7 +89,6 @@ Send a chat message to the assistant. Test via Postamn or on the application aft
 
 ### Via Postman
 Send a POST request to:
-- Deployed application: `http://54.194.249.252:6777/message`
 - Local development: `http://localhost:6777/message`
 
 ### Via Web Interface
@@ -125,7 +122,6 @@ Generate reports for farmers due to receive one today. (With the press of a butt
 
 ### Via Postman
 Send a POST request to:
-- Deployed application: `http://54.194.249.252:6777/generate-reports`
 - Local development: `http://localhost:6777/generate-reports`
 
 ### Via Web Interface
