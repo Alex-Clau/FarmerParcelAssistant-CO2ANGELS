@@ -19,6 +19,28 @@ USE_LLM=true currently
 - **Postman Tests** - 100 tests covering both endpoints
 - **Data directory** - for seeding the database and showcasing Postman tests, **NOT** used for storing data
 
+## UI Preview
+
+<div style="overflow-x: auto; white-space: nowrap; background-color: #0d1117; padding: 15px; border-radius: 8px;">
+  <table style="border-collapse: collapse; border: none; display: inline-table;">
+    <tr>
+      <td style="padding-right: 15px; border: none; vertical-align: top;">
+        <img src="https://github.com/user-attachments/assets/63e30d07-f489-4171-8a45-5091e208322c" height="450" alt="Auth Flow" />
+      </td>
+      <td style="padding-right: 15px; border: none; vertical-align: top;">
+        <img src="https://github.com/user-attachments/assets/aa602693-b3ea-434a-b5c5-9f68ebd6ed58" height="450" alt="Report Generation" />
+      </td>
+      <td style="padding-right: 15px; border: none; vertical-align: top;">
+        <img src="https://github.com/user-attachments/assets/4bb196a4-d220-4ee8-9f30-897df5b1743f" height="450" alt="Parcel Inquiry" />
+      </td>
+      <td style="padding: 0; border: none; vertical-align: top;">
+        <img src="https://github.com/user-attachments/assets/71aa5899-4928-4b28-90e4-6bd6b62cd532" height="450" alt="Detailed View" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+
 ## Tech Stack
 
 - **Backend**: Node.js, Express.js, PostgreSQL
